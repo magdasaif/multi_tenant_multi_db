@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory, BelongToStoreTrait;
+    use HasFactory;
+    // use BelongToStoreTrait; //use with single db
     public function category()
     {
         return $this->belongsTo(Category::class);

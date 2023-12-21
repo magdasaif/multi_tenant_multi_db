@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class SetActiveStore
 {
@@ -26,9 +28,23 @@ class SetActiveStore
         // dd($store);      
         if($store){
             app()->instance('store.active',$store); // 'store.active' بخزن فيها القيمة بمتغير اسمه 
-        }else{
-           //we can here create new store with browsed host 
-        }    
+            $db_name=$store->database_options['dbname'];
+            #change defualt for connection in database.php
+            Config::set('database.connections.tenant.database',$db_name);
+
+            //===============================================
+            //change connection 
+            DB::purge('mysql');
+            DB::purge('tenant');
+            DB::connection('tenant');
+            DB::setDefaultConnection('tenant');
+            //===============================================
+
+        }
+
+        // dd(DB::getDefaultConnection());
+
+        
         return $next($request);
     }
 }

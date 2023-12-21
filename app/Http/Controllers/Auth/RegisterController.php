@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\StoreCreated;
+use Exception;
 use App\Models\User;
+use App\Models\Store;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -65,10 +70,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        DB::BeginTransaction();
+        try{
+            //=============================================
+            // create new store
+            $store=Store::create([
+                'name'=>$data['name'],
+                'domain'=>Str::slug($data['name']),
+                // 'database_options'=>'',
+            ]); 
+            //=============================================
+            //create user with created store
+            $user=User::create([
+                'store_id'=>$store->id,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            //=============================================
+            DB::commit();
+            //=============================================
+            //fire event indicate that new store created to create new db
+            event(new StoreCreated($store));
+            //=============================================
+            //=============================================
+
+        }catch(\Exception $e){
+            DB::rollBack();
+            throw $e;
+        }
+        
     }
 }

@@ -11,7 +11,9 @@ class Store extends Model
 {
     use HasFactory;
     public $fillable=['name','domain','database_options'];
-    
+    protected $casts = [
+        'database_options' => 'array',
+    ];
     public function categories()
     {
         return $this->hasMany(Category::class);
