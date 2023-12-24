@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -19,9 +21,8 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
-//to apply for all routes
-Route::middleware('SetActiveStore')->group(function () {
-    Route::get('/products', [ProductsController::class, 'index']);
-  });
+    
+Route::get('/create_tenant/{domain}', [TenantController::class, 'index']);
+// Route::get('/create_user/{name}/{email}/password', [UserController::class, 'create']);
 
 
