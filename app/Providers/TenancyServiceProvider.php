@@ -25,9 +25,9 @@ class TenancyServiceProvider extends ServiceProvider
             Events\CreatingTenant::class => [],
             Events\TenantCreated::class => [
                 JobPipeline::make([
-                    Jobs\CreateDatabase::class,
-                    Jobs\MigrateDatabase::class,
-                    // Jobs\SeedDatabase::class,
+                    // Jobs\CreateDatabase::class,//stop this for single db
+                    // Jobs\MigrateDatabase::class,//stop this for single db
+                    // Jobs\SeedDatabase::class,//stop this for single db
 
                     // Your own jobs to prepare the tenant.
                     // Provision API keys, create S3 buckets, anything you want!

@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\SetActiveStore;
+// use App\Http\Middleware\SetActiveStore;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,6 +68,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'SetActiveStore' =>  \App\Http\Middleware\SetActiveStore::class, //apply for specific routess
+        // 'SetActiveStore' =>  \App\Http\Middleware\SetActiveStore::class, //apply for specific routess
     ];
 }
