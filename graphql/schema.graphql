@@ -1,12 +1,20 @@
+directive @upperCase on ARGUMENT_DEFINITION
+directive @subDomain on FIELD_DEFINITION
+directive @middleware on FIELD_DEFINITION
+
 type Query 
 {
-  allusers: [User] @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\UserQuery@users") 
-  test: message @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\UserQuery@test")
+  centralDomainUsers:[User]     @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\central\\UserQuery@tenantUsers") 
+  subDomainUsers:[User]          @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\sub\\UserQuery@allUsers") @middleware(checks: ["\\Stancl\\Tenancy\\Middleware\\PreventAccessFromCentralDomains","\\Stancl\\Tenancy\\Middleware\\InitializeTenancyByDomain"] )
+  # test: message               @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\UserQuery@test") 
+
+  testDirective(name:String @upperCase):String  @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\sub\\UserQuery@testDirective")  
+
 }
 #===========================#
 type User
 {
-  # id: ID!
+  id: ID!
   name: String!
   email: String!
 }

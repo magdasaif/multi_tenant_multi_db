@@ -37,8 +37,8 @@ return [
             // Logs every incoming GraphQL query.
             // \Nuwave\Lighthouse\Support\Http\Middleware\LogGraphQLQueries::class,
             
-            \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
-            \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+            // \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+            // \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
 
         ],
 
@@ -174,15 +174,16 @@ return [
     */
 
     'namespaces' => [
-        'models' => ['App', 'App\\Models'],
-        'queries' => 'App\\GraphQL\\Queries',
-        'mutations' => 'App\\GraphQL\\Mutations',
+        'models'        => ['App', 'App\\Models'],
+        'queries'       => 'App\\GraphQL\\Queries',
+        'mutations'     => 'App\\GraphQL\\Mutations',
         'subscriptions' => 'App\\GraphQL\\Subscriptions',
-        'interfaces' => 'App\\GraphQL\\Interfaces',
-        'unions' => 'App\\GraphQL\\Unions',
-        'scalars' => 'App\\GraphQL\\Scalars',
-        'directives' => ['App\\GraphQL\\Directives'],
-        'validators' => ['App\\GraphQL\\Validators'],
+        'interfaces'    => 'App\\GraphQL\\Interfaces',
+        'unions'        => 'App\\GraphQL\\Unions',
+        'scalars'       => 'App\\GraphQL\\Scalars',
+        'directives'    => ['App\\GraphQL\\Directives'],
+        // 'Middlewares'   => ['App\\GraphQL\\Middleware'],
+        'validators'    => ['App\\GraphQL\\Validators'],
     ],
 
     /*

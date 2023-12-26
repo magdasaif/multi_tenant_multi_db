@@ -25,8 +25,6 @@ class Kernel extends HttpKernel
         //Custom Middleware;
         // SetActiveStore::class, //apply for all routes
         // \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
-
-
     ];
 
     /**
@@ -73,5 +71,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'SetActiveStore' =>  \App\Http\Middleware\SetActiveStore::class, //apply for specific routess
+
+        'tenancy'=>\Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
     ];
 }

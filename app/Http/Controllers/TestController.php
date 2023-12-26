@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Tenant;
+// use Stancl\Tenancy\Tenancy;
+use Stancl\Tenancy\Facades\Tenancy;
 
 class TestController extends Controller
 {
@@ -15,8 +18,7 @@ class TestController extends Controller
             return response()->json($user);
         }
         return 'no user found';
-    }
-    
+    }  
     //=========================================================
     public function users(){
         //=========================================================
@@ -63,5 +65,29 @@ class TestController extends Controller
         // return response()->json($members);
         //=========================================================
 
+    }
+    //=========================================================
+    public function allTenantUsers(){
+        // return tenant();
+        // Get the subdomain tenants
+        $tenants = Tenant::all();
+
+        $users = [];
+        
+        // $nn=new Tenancy();
+        // return $nn->model();
+        foreach ($tenants as $tenant) {
+            // Switch to the subdomain tenant's database connection
+            
+            Tenancy::initialize($tenant);
+
+            // Retrieve users from the subdomain tenant's database
+            $tenantusers = User::all();
+
+            // Merge the users into the main users array
+            $users = array_merge($users, $tenantusers->toArray());
+        }
+        // return $users;
+        return response()->json($users);
     }
 }

@@ -26,5 +26,6 @@ Route::get('/create_tenant/{domain}', [TenantController::class, 'index']);
 
 Route::get('/test_rest/{user}', [TestController::class, 'test_rest']);
 Route::get('/users', [TestController::class, 'users']);
+Route::get('/all_users', [TestController::class, 'allTenantUsers']);
 
 
