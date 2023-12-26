@@ -24,6 +24,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         //Custom Middleware;
         // SetActiveStore::class, //apply for all routes
+        // \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+
 
     ];
 
@@ -42,12 +44,14 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
+            // \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
         ],
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
         ],
     ];
 

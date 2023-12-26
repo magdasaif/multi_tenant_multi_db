@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.5",
         "laravel/ui": "*",
+        "nuwave/lighthouse": "*",
         "stancl/tenancy": "*",
         "tightenco/ziggy": "^1.0"
     },

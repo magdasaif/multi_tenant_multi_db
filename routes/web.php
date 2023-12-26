@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TenantController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +16,15 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+// Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
     
 Route::get('/create_tenant/{domain}', [TenantController::class, 'index']);
 // Route::get('/create_user/{name}/{email}/password', [UserController::class, 'create']);
+
+Route::get('/test_rest/{user}', [TestController::class, 'test_rest']);
+Route::get('/users', [TestController::class, 'users']);
 
 

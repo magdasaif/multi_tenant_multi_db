@@ -1,0 +1,15 @@
+type Query {
+    # tenants: [Tenant!]! @all
+    users: [User!]! @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\UserQuery@users")
+    test:message @field(resolver: "App\\Http\\Controllers\\LighhouseGraphQl\\Queries\\UserQuery@test")
+}
+
+type User  {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+type message{
+  message:String
+}
