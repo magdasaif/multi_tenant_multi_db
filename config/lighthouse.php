@@ -1,5 +1,8 @@
 <?php
 
+use App\Overrides\Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
+use App\Overrides\Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -37,8 +40,8 @@ return [
             // Logs every incoming GraphQL query.
             // \Nuwave\Lighthouse\Support\Http\Middleware\LogGraphQLQueries::class,
             
-            // \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
-            // \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+            InitializeTenancyByDomain::class,
+            PreventAccessFromCentralDomains::class,
 
         ],
 
