@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
     
-Route::get('/create_tenant/{domain}', [TenantController::class, 'index']);
+Route::get('/create_tenant/{domain}/{project}', [TenantController::class, 'index']);
 // Route::get('/create_user/{name}/{email}/password', [UserController::class, 'create']);
 
 Route::get('/test_rest/{user}', [TestController::class, 'test_rest']);
